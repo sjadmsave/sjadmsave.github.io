@@ -1,1 +1,2 @@
+04e98ef7d7706e88dbe94fe10aa029bb771205910dd39a842b2e418f06e6e80b  APK-Studio-Cloud-1.8.1-Stable-signed.apk
 5c935ccd2c3559968bcbb2fa00371939db07ba3ed1bcf33a7d191d09878003c4  APK-Studio-Cloud-1.7.0-Release-signed.apk
