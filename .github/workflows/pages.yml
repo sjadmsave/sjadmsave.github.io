@@ -32,3 +32,17 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public Android APK release
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://sjadmsave.github.io"
+          APK="APK-Studio-Cloud-1.7.0-Release-signed.apk"
+          SHA="5c935ccd2c3559968bcbb2fa00371939db07ba3ed1bcf33a7d191d09878003c4"
+          curl --fail --silent --show-error --location --retry 18 --retry-delay 8 --retry-all-errors --retry-max-time 180 -o /tmp/apkstudio-public.apk "$BASE/downloads/$APK"
+          echo "$SHA  /tmp/apkstudio-public.apk" | sha256sum --check
+          for page in / /download.html /privacy.html /terms.html; do
+            curl --fail --silent --show-error --location --retry 5 --retry-delay 3 --retry-all-errors -o /dev/null "$BASE$page"
+          done
+          echo "Verified public website and signed APK binary."
+
