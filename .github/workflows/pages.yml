@@ -37,8 +37,8 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://sjadmsave.github.io"
-          APK="APK-Studio-Cloud-1.7.0-Release-signed.apk"
-          SHA="5c935ccd2c3559968bcbb2fa00371939db07ba3ed1bcf33a7d191d09878003c4"
+          APK="APK-Studio-Cloud-1.8.1-Stable-signed.apk"
+          SHA="04e98ef7d7706e88dbe94fe10aa029bb771205910dd39a842b2e418f06e6e80b"
           curl --fail --silent --show-error --location --retry 18 --retry-delay 8 --retry-all-errors --retry-max-time 180 -o /tmp/apkstudio-public.apk "$BASE/downloads/$APK"
           echo "$SHA  /tmp/apkstudio-public.apk" | sha256sum --check
           for page in / /download.html /privacy.html /terms.html; do
