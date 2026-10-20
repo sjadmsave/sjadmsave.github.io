@@ -96,6 +96,25 @@
       "notes": "تحسينلت",
       "publishedAt": "2026-10-20",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f\/releases\/download\/v3\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-wrqah-sual-iq-e0b4a23b",
+      "tag": "v2",
+      "name": "ورقتي",
+      "description": "انشاء ورقة الاسئلة باسلوب سهل",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-wrqah-sual-iq-e0b4a23b.png?v=6efdcd30ff6d0350",
+      "status": "published",
+      "packageName": "wrqah.sual.iq",
+      "versionCode": 2,
+      "versionName": "1.0.2",
+      "sha256": "6e6fd503b66ea812061306064fdbe8ef8697a2f032bb891aa57a9e9e08b96a8b",
+      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
+      "notes": "اصلاح",
+      "publishedAt": "2026-10-20",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
