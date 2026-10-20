@@ -1,5 +1,25 @@
 {
   "schema": 1,
   "store": "المنهج",
-  "apps": []
+  "apps": [
+    {
+      "id": "sjadmsave\/apkstudio-com-mnhj-noor-24b41968",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-mnhj-noor-24b41968",
+      "tag": "v2",
+      "name": "منهج النور",
+      "description": "",
+      "category": "الكتب والمراجع",
+      "icon": "",
+      "status": "published",
+      "packageName": "com.mnhj.noor",
+      "versionCode": 2,
+      "versionName": "6.1.5",
+      "sha256": "130f9d8022b187249e4fd210fd8307c6ba2c50dde5830daa7e11032ba5d64855",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "تحسينات الاداء",
+      "publishedAt": "2026-10-20",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v2\/app-release.apk"
+    }
+  ]
 }
