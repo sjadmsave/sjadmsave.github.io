@@ -101,20 +101,20 @@
       "id": "sjadmsave\/apkstudio-finance-glass-co-819e56d2",
       "owner": "sjadmsave",
       "repo": "apkstudio-finance-glass-co-819e56d2",
-      "tag": "v2",
+      "tag": "v4",
       "name": "المحفظة",
       "description": "اصلاح مشكلة تعديل سجل الديون",
       "category": "أدوات",
       "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-finance-glass-co-819e56d2.png?v=f3ceed71bad391e7",
       "status": "published",
       "packageName": "finance.glass.co",
-      "versionCode": 2,
+      "versionCode": 4,
       "versionName": "1.0.0",
-      "sha256": "5b98317628107c4b161b9e0a76a29cbd5ba7cd5781e83cc2c07c6d6dc937844a",
+      "sha256": "10d0d349876381e4f96029cd74cbc08a8d5ae08d9f001d7dfc53f50381e2b6d4",
       "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
-      "notes": "تحسينات في الاداء",
+      "notes": "اصلاح مشكلة تعديل سجل الديون",
       "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v2\/app-release.apk"
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v4\/app-release.apk"
     }
   ]
 }
