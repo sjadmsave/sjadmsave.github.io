@@ -60,25 +60,6 @@
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-khtab-j-0e8ed427\/releases\/download\/v9\/app-release.apk"
     },
     {
-      "id": "sjadmsave\/apkstudio-finance-glass-co-819e56d2",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-finance-glass-co-819e56d2",
-      "tag": "v2",
-      "name": "المحفظة",
-      "description": "ادارة المصروف",
-      "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-finance-glass-co-819e56d2.png?v=f3ceed71bad391e7",
-      "status": "published",
-      "packageName": "finance.glass.co",
-      "versionCode": 2,
-      "versionName": "1.0.0",
-      "sha256": "5b98317628107c4b161b9e0a76a29cbd5ba7cd5781e83cc2c07c6d6dc937844a",
-      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
-      "notes": "تحسينات في الاداء",
-      "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v2\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f",
       "owner": "sjadmsave",
       "repo": "apkstudio-com-myapp-app394e585f-394e585f",
@@ -115,6 +96,25 @@
       "notes": "اصلاح",
       "publishedAt": "2026-10-20",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-finance-glass-co-819e56d2",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-finance-glass-co-819e56d2",
+      "tag": "v2",
+      "name": "المحفظة",
+      "description": "اصلاح مشكلة تعديل سجل الديون",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-finance-glass-co-819e56d2.png?v=f3ceed71bad391e7",
+      "status": "published",
+      "packageName": "finance.glass.co",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "5b98317628107c4b161b9e0a76a29cbd5ba7cd5781e83cc2c07c6d6dc937844a",
+      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
+      "notes": "تحسينات في الاداء",
+      "publishedAt": "2026-10-20",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
