@@ -60,25 +60,6 @@
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-khtab-j-0e8ed427\/releases\/download\/v9\/app-release.apk"
     },
     {
-      "id": "sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-com-myapp-app394e585f-394e585f",
-      "tag": "v3",
-      "name": "هياكل النور",
-      "description": "مسابقات تعليمية",
-      "category": "ترفيهية",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-myapp-app394e585f-394e585f.png?v=d4bb5c68d6b93cbd",
-      "status": "published",
-      "packageName": "com.myapp.app394e585f",
-      "versionCode": 3,
-      "versionName": "1.0.3",
-      "sha256": "98ec691e120821d41a5aa58e45640c72854ab03516928ec48a7ef9d47e8fa408",
-      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
-      "notes": "تحسينلت",
-      "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f\/releases\/download\/v3\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b",
       "owner": "sjadmsave",
       "repo": "apkstudio-wrqah-sual-iq-e0b4a23b",
@@ -115,6 +96,25 @@
       "notes": "اصلاح مشكلة تعديل سجل الديون",
       "publishedAt": "2026-10-20",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v4\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-myapp-app394e585f-394e585f",
+      "tag": "v4",
+      "name": "هياكل النور",
+      "description": "مسابقات تعليمية اسلامية",
+      "category": "ترفيهية",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-myapp-app394e585f-394e585f.png?v=d4bb5c68d6b93cbd",
+      "status": "published",
+      "packageName": "com.myapp.app394e585f",
+      "versionCode": 4,
+      "versionName": "1.0.4",
+      "sha256": "aae0448587ca45853dca65c9730a66bfd112138c7e7d5eb2af8ad067268f495a",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "تحسين الاداء",
+      "publishedAt": "2026-10-20",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f\/releases\/download\/v4\/app-release.apk"
     }
   ]
 }
