@@ -101,20 +101,20 @@
       "id": "sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f",
       "owner": "sjadmsave",
       "repo": "apkstudio-com-myapp-app394e585f-394e585f",
-      "tag": "v4",
+      "tag": "v5",
       "name": "هياكل النور",
       "description": "مسابقات تعليمية اسلامية",
-      "category": "ترفيهية",
+      "category": "أدوات",
       "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-myapp-app394e585f-394e585f.png?v=d4bb5c68d6b93cbd",
       "status": "published",
       "packageName": "com.myapp.app394e585f",
-      "versionCode": 4,
+      "versionCode": 5,
       "versionName": "1.0.4",
-      "sha256": "aae0448587ca45853dca65c9730a66bfd112138c7e7d5eb2af8ad067268f495a",
+      "sha256": "293020eefe6e0bbf8b028ad9b9a1204158ca0794b86bc6bbcef30d3a2badf783",
       "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
-      "notes": "تحسين الاداء",
+      "notes": "اصلاحات عميقة",
       "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f\/releases\/download\/v4\/app-release.apk"
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-394e585f\/releases\/download\/v5\/app-release.apk"
     }
   ]
 }
