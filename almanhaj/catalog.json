@@ -20,6 +20,25 @@
       "notes": "تحسينات الاداء",
       "publishedAt": "2026-10-20",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-khtab-j-0e8ed427",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-khtab-j-0e8ed427",
+      "tag": "v9",
+      "name": "خطب الجمعة",
+      "description": "خطب الجمعة بنص وصوت الولي الشهيد السيد محمد محمد صادق الصدر",
+      "category": "الكتب والمراجع",
+      "icon": "",
+      "status": "published",
+      "packageName": "com.khtab.j",
+      "versionCode": 9,
+      "versionName": "1.8.0.4",
+      "sha256": "6f64148acc15b76e28b479715ac012ab1d6d3c4a72d63b344f90138897180fb8",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "تحسينات في الاداء",
+      "publishedAt": "2026-10-20",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-khtab-j-0e8ed427\/releases\/download\/v9\/app-release.apk"
     }
   ]
 }
