@@ -41,25 +41,6 @@
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v2\/app-release.apk"
     },
     {
-      "id": "sjadmsave\/apkstudio-com-mahde-q-ef08b623",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-com-mahde-q-ef08b623",
-      "tag": "v6",
-      "name": "الموسوعة المهدوية",
-      "description": "موسوعة الأمام المهدي (ع) للشهيد السيد محمد محمد صادق الصدر قدس سره",
-      "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mahde-q-ef08b623.png?v=d4df04874a65ecff",
-      "status": "published",
-      "packageName": "com.mahde.q",
-      "versionCode": 6,
-      "versionName": "1.0.6",
-      "sha256": "db6d81d4ddd47d635044f30d4793ac95f0cf45704f04f298c423bbcc1803a9ea",
-      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
-      "notes": "تحسينات",
-      "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mahde-q-ef08b623\/releases\/download\/v6\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-com-mnhj-noor-24b41968",
       "owner": "sjadmsave",
       "repo": "apkstudio-com-mnhj-noor-24b41968",
@@ -77,6 +58,25 @@
       "notes": "تحسينات الاداء",
       "publishedAt": "2026-10-20",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-mahde-q-ef08b623",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-mahde-q-ef08b623",
+      "tag": "v6",
+      "name": "الموسوعة المهدوية",
+      "description": "موسوعة الأمام المهدي (ع) للشهيد السيد محمد محمد صادق الصدر قدس سره",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mahde-q-ef08b623.png?v=d4df04874a65ecff",
+      "status": "published",
+      "packageName": "com.mahde.q",
+      "versionCode": 6,
+      "versionName": "1.0.6",
+      "sha256": "db6d81d4ddd47d635044f30d4793ac95f0cf45704f04f298c423bbcc1803a9ea",
+      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
+      "notes": "تحسينات",
+      "publishedAt": "2026-10-20",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mahde-q-ef08b623\/releases\/download\/v6\/app-release.apk"
     }
   ]
 }
