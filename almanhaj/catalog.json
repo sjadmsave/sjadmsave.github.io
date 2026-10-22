@@ -96,6 +96,25 @@
       "notes": "اصلاح مشكلة تعديل سجل الديون",
       "publishedAt": "2026-10-20",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v4\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-myapp-app394e585f-861bb793",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-myapp-app394e585f-861bb793",
+      "tag": "v2",
+      "name": "مشكاة النور",
+      "description": "مسابقات تعليمية اسلامية",
+      "category": "ترفيه",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-myapp-app394e585f-861bb793.png?v=ae0e216537faef67",
+      "status": "published",
+      "packageName": "com.myapp.app394e585f",
+      "versionCode": 2,
+      "versionName": "2.0.0end",
+      "sha256": "b217c8ee79e260ed8a22b3470a50bb59fbdf3f85b0e75b5189a3be858e23e591",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "اصلاحات عميقة",
+      "publishedAt": "2026-10-22",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-861bb793\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
