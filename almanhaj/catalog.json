@@ -115,6 +115,25 @@
       "notes": "اصلاحات عميقة",
       "publishedAt": "2026-10-22",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app394e585f-861bb793\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-qesas-anbya-quran-b343a38a",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-qesas-anbya-quran-b343a38a",
+      "tag": "v2",
+      "name": "قصص الانبياء",
+      "description": "قصص الانبياء في القران الكريم",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-qesas-anbya-quran-b343a38a.png?v=00e6accbc97dcf53",
+      "status": "published",
+      "packageName": "qesas.anbya.quran",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "793afb4f5ae0683f9633bd6836a7a6565b19bb8c41a29ae2df58c59d36bd360b",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "إصدار جديد",
+      "publishedAt": "2026-10-23",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-qesas-anbya-quran-b343a38a\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
