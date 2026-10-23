@@ -134,6 +134,25 @@
       "notes": "إصدار جديد",
       "publishedAt": "2026-10-23",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-qesas-anbya-quran-b343a38a\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-serat-al-aemma-49563e9a",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-Serat-al-aemma-49563e9a",
+      "tag": "v4",
+      "name": "سيرة اهل البيت",
+      "description": "سيرة ائمة أهل البيت",
+      "category": "التعليم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-serat-al-aemma-49563e9a.png?v=71951e4062bfa29d",
+      "status": "published",
+      "packageName": "serat.al.aemma",
+      "versionCode": 4,
+      "versionName": "1.0.0",
+      "sha256": "9fe035a0bb5604b3304d17a38d5ceaf5e12739a8ac69bad108e8f30fedbcf3b1",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "تطبيق جديد",
+      "publishedAt": "2026-10-23",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-Serat-al-aemma-49563e9a\/releases\/download\/v4\/app-release.apk"
     }
   ]
 }
