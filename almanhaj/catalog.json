@@ -172,6 +172,25 @@
       "notes": "تطبيق جديد",
       "publishedAt": "2026-10-24",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app3d547519-3d547519\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-afaq-flsfa-8f0ea009",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-Afaq-flsfa-8f0ea009",
+      "tag": "v2",
+      "name": "الفلسفة",
+      "description": "مدخل الى الفلسفة",
+      "category": "مداخل العلوم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-afaq-flsfa-8f0ea009.png?v=fbe0b0650f9b3847",
+      "status": "published",
+      "packageName": "afaq.flsfa",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "65a4a4d18f7b5e15e24cb42e17ed2bfcc29c792fc73ba8837603af7ca5c1c1f5",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "تطبيق جديد",
+      "publishedAt": "2026-10-24",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-Afaq-flsfa-8f0ea009\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
