@@ -248,6 +248,25 @@
       "notes": "تِبيان، مدخل لعلوم القران",
       "publishedAt": "2026-10-24",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-tbyan-qoran-com-dbea598c\/releases\/download\/v1\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-madsr-den-f023e655",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-madsr-den-f023e655",
+      "tag": "v2",
+      "name": "مَدار",
+      "description": "مدخل لدراسة الأديان",
+      "category": "مداخل العلوم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-madsr-den-f023e655.png?v=04d13ca2d32b09c2",
+      "status": "published",
+      "packageName": "madsr.den",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "e68343b6b092f4e1fbe8680cb1cdb5fe63232b0c269fc0c7e4e67508c7923ad3",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "مدخل لدراسة الأديان",
+      "publishedAt": "2026-10-24",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-madsr-den-f023e655\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
