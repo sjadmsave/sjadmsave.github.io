@@ -153,6 +153,25 @@
       "notes": "تطبيق جديد",
       "publishedAt": "2026-10-23",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-Serat-al-aemma-49563e9a\/releases\/download\/v4\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-myapp-app3d547519-3d547519",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-myapp-app3d547519-3d547519",
+      "tag": "v2",
+      "name": "المنطق",
+      "description": "مدخل الى علم المنطق",
+      "category": "مداخل العلوم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-myapp-app3d547519-3d547519.png?v=7d7bd36a9f0e9612",
+      "status": "published",
+      "packageName": "baserh.man",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "a45919fab18c5254e20f3e136016e688b8b10c7fe7bc37d4afd2dae3f4409c84",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "تطبيق جديد",
+      "publishedAt": "2026-10-24",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app3d547519-3d547519\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
