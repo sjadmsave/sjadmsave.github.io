@@ -229,6 +229,25 @@
       "notes": "مدخل الى علم الكلام",
       "publishedAt": "2026-10-24",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-burahin-kalam-4623ea0c\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-tbyan-qoran-com-dbea598c",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-tbyan-qoran-com-dbea598c",
+      "tag": "v1",
+      "name": "تِبيان",
+      "description": "مدخل لعلوم القران",
+      "category": "مداخل العلوم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-tbyan-qoran-com-dbea598c.png?v=68ac9a4df8acdbbe",
+      "status": "published",
+      "packageName": "tbyan.qoran.com",
+      "versionCode": 1,
+      "versionName": "1.0.0",
+      "sha256": "3df9abf4acceb0d7eb4ff3a1c80a66b539d7f65362a203805f2a7b6113001b1b",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "تِبيان، مدخل لعلوم القران",
+      "publishedAt": "2026-10-24",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-tbyan-qoran-com-dbea598c\/releases\/download\/v1\/app-release.apk"
     }
   ]
 }
