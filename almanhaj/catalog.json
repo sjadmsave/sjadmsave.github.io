@@ -191,6 +191,25 @@
       "notes": "تطبيق جديد",
       "publishedAt": "2026-10-24",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-Afaq-flsfa-8f0ea009\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-al-asoul-rog-ac9c314f",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-al-asoul-rog-ac9c314f",
+      "tag": "v1",
+      "name": "علم الاصول",
+      "description": "مدخل الى علم الاصول",
+      "category": "مداخل العلوم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-al-asoul-rog-ac9c314f.png?v=5f376d8f63eced92",
+      "status": "published",
+      "packageName": "al.asoul.rog",
+      "versionCode": 1,
+      "versionName": "1.0.0",
+      "sha256": "a33c4f93b9df0733187b0e2f0cdc26bf5b1a7d9858d849c34fa461138bf22066",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "مدخل الى علم الاصول",
+      "publishedAt": "2026-10-24",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-al-asoul-rog-ac9c314f\/releases\/download\/v1\/app-release.apk"
     }
   ]
 }
