@@ -210,6 +210,25 @@
       "notes": "مدخل الى علم الاصول",
       "publishedAt": "2026-10-24",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-al-asoul-rog-ac9c314f\/releases\/download\/v1\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-burahin-kalam-4623ea0c",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-burahin-kalam-4623ea0c",
+      "tag": "v2",
+      "name": "علم الكلام",
+      "description": "مدخل الى علم الكلام",
+      "category": "مداخل العلوم",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-burahin-kalam-4623ea0c.png?v=ce07a712679c13d4",
+      "status": "published",
+      "packageName": "burahin.kalam",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "959650d921b74bde53c3c4370b7a6b7371c208754f02caf7d1ec8b6832990c8c",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "مدخل الى علم الكلام",
+      "publishedAt": "2026-10-24",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-burahin-kalam-4623ea0c\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
