@@ -267,6 +267,25 @@
       "notes": "ربط الحساب بكوكل وتسجيل الدخول الآمن",
       "publishedAt": "2026-10-26",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-finance-glass-co-819e56d2\/releases\/download\/v5\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-lord-of-the-rings-cf078e89",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-lord-of-the-rings-cf078e89",
+      "tag": "v2",
+      "name": "الأرض الوسطى",
+      "description": "الغاز سيد الخواتم",
+      "category": "ترفيه",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-lord-of-the-rings-cf078e89.png?v=b61b8fce5e5ea1cc",
+      "status": "published",
+      "packageName": "lord.of.the.rings",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "487e6251fc5ed558bff4c50d8ea939e6a5e594841b655d09e08d2dac31891d39",
+      "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
+      "notes": "تطبيق جديد",
+      "publishedAt": "2026-10-28",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-lord-of-the-rings-cf078e89\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
