@@ -310,20 +310,20 @@
       "id": "sjadmsave\/apkstudio-oqood-car-house-3829ad9f",
       "owner": "sjadmsave",
       "repo": "apkstudio-oqood-car-house-3829ad9f",
-      "tag": "v1",
+      "tag": "v2",
       "name": "تنظيم العقود",
       "description": "تنظيم العقود",
       "category": "أدوات",
       "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-oqood-car-house-3829ad9f.png?v=f72ec09bcc65b060",
       "status": "published",
       "packageName": "oqood.car.house",
-      "versionCode": 1,
+      "versionCode": 2,
       "versionName": "1.5.5",
-      "sha256": "115f71bc14c86653525b208a36397980d7e2257c7cd01f3d91f4fa252cf21e9c",
+      "sha256": "1d757ccb07eddf650aa6657d05ed490a2712ee964373b6b7091b391758a1a756",
       "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
-      "notes": "..",
+      "notes": "تحسين الاداء",
       "publishedAt": "2026-11-01",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-oqood-car-house-3829ad9f\/releases\/download\/v1\/app-release.apk"
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-oqood-car-house-3829ad9f\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
