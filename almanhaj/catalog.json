@@ -324,6 +324,25 @@
       "notes": "تحسين الاداء",
       "publishedAt": "2026-11-01",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-oqood-car-house-3829ad9f\/releases\/download\/v2\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-klemat-mu-cut-342f7a0a",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-klemat-mu-cut-342f7a0a",
+      "tag": "v2",
+      "name": "مجرة الحروف",
+      "description": "كلمات متقاطعة",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-klemat-mu-cut-342f7a0a.png?v=085650942c7cd937",
+      "status": "published",
+      "packageName": "klemat.mu.cut",
+      "versionCode": 2,
+      "versionName": "1.0.0",
+      "sha256": "dd44031c82385050d4a639a34d28844bce2e0b317c7861f873f29fa7cb84262a",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "تحسينات في الاداء",
+      "publishedAt": "2026-11-03",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-klemat-mu-cut-342f7a0a\/releases\/download\/v2\/app-release.apk"
     }
   ]
 }
