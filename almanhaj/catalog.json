@@ -3,25 +3,6 @@
   "store": "المنهج",
   "apps": [
     {
-      "id": "sjadmsave\/apkstudio-com-mnhj-noor-24b41968",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-com-mnhj-noor-24b41968",
-      "tag": "v2",
-      "name": "منهج النور",
-      "description": "المسائل الفقهية للسيد الشهيد الصدر",
-      "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mnhj-noor-24b41968.png?v=a1a7d3806546904b",
-      "status": "published",
-      "packageName": "com.mnhj.noor",
-      "versionCode": 2,
-      "versionName": "6.1.5",
-      "sha256": "130f9d8022b187249e4fd210fd8307c6ba2c50dde5830daa7e11032ba5d64855",
-      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
-      "notes": "تحسينات الاداء",
-      "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v2\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-com-mahde-q-ef08b623",
       "owner": "sjadmsave",
       "repo": "apkstudio-com-mahde-q-ef08b623",
@@ -343,6 +324,25 @@
       "notes": "تحديث واجهة الهاتف والتنقّل، وتصميم أيقونة جديدة، وإضافة البحث ومعاينات الخطوط والصور إلى قوائم الاختيار.\nتصدير العقد ومرفقاته في ملف PDF واحد، وحفظ الصفحة المختارة بصيغة PNG بدقة تصل إلى 8K.",
       "publishedAt": "2026-11-05",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-oqood-car-house-3829ad9f\/releases\/download\/v4\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-mnhj-noor-24b41968",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-mnhj-noor-24b41968",
+      "tag": "v3",
+      "name": "منهج النور",
+      "description": "",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mnhj-noor-24b41968.png?v=fbb63cee94802655",
+      "status": "published",
+      "packageName": "com.mnhj.noor",
+      "versionCode": 3,
+      "versionName": "6.1.5",
+      "sha256": "d6b6aee0a808f7fe6cd2698ce8295619eee7f3577926c155f15d322f2fa247e1",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "تحسين واصلاح",
+      "publishedAt": "2026-11-05",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v3\/app-release.apk"
     }
   ]
 }
