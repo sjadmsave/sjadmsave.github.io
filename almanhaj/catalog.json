@@ -329,20 +329,20 @@
       "id": "sjadmsave\/apkstudio-oqood-car-house-3829ad9f",
       "owner": "sjadmsave",
       "repo": "apkstudio-oqood-car-house-3829ad9f",
-      "tag": "v3",
+      "tag": "v4",
       "name": "تنظيم العقود",
       "description": "تنظيم العقود",
       "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-oqood-car-house-3829ad9f.png?v=f72ec09bcc65b060",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-oqood-car-house-3829ad9f.png?v=409dd2fe81cd5c81",
       "status": "published",
       "packageName": "oqood.car.house",
-      "versionCode": 3,
-      "versionName": "1.5.5",
-      "sha256": "600ebd8a8ba2cebd510044b18aed6fce3b7f9432fa28dc919c2155478fcea447",
+      "versionCode": 4,
+      "versionName": "v3.6.1",
+      "sha256": "2b54287bc439d363f3cbecb7b0a306d3d95558e453f86504c28d7747867a6424",
       "certificateSha256": "0906fc3cf53bef49e3133d1b025f1a0f067770eb52fb0d7270f0782497557a58",
-      "notes": "تحسين ألوان وأحجام نصوص جسم العقد",
-      "publishedAt": "2026-11-04",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-oqood-car-house-3829ad9f\/releases\/download\/v3\/app-release.apk"
+      "notes": "تحديث واجهة الهاتف والتنقّل، وتصميم أيقونة جديدة، وإضافة البحث ومعاينات الخطوط والصور إلى قوائم الاختيار.\nتصدير العقد ومرفقاته في ملف PDF واحد، وحفظ الصفحة المختارة بصيغة PNG بدقة تصل إلى 8K.",
+      "publishedAt": "2026-11-05",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-oqood-car-house-3829ad9f\/releases\/download\/v4\/app-release.apk"
     }
   ]
 }
