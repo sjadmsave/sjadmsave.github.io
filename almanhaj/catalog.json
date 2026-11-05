@@ -329,20 +329,20 @@
       "id": "sjadmsave\/apkstudio-com-mnhj-noor-24b41968",
       "owner": "sjadmsave",
       "repo": "apkstudio-com-mnhj-noor-24b41968",
-      "tag": "v3",
+      "tag": "v4",
       "name": "منهج النور",
-      "description": "",
+      "description": "من تراث الشهيد الصدر\nمسائل وفتاوى\nطبقا لفتاوى آية الله العظمى\nالشهيد السيد محمد الصدر",
       "category": "أدوات",
       "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mnhj-noor-24b41968.png?v=fbb63cee94802655",
       "status": "published",
       "packageName": "com.mnhj.noor",
-      "versionCode": 3,
+      "versionCode": 4,
       "versionName": "6.1.5",
-      "sha256": "d6b6aee0a808f7fe6cd2698ce8295619eee7f3577926c155f15d322f2fa247e1",
+      "sha256": "f4c609aa2b3e4746e9f0e0343d1e3fcc009d199e453e37d00d5222b108e8b459",
       "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
-      "notes": "تحسين واصلاح",
-      "publishedAt": "2026-11-05",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v3\/app-release.apk"
+      "notes": "اصلاح الأخطاء",
+      "publishedAt": "2026-11-06",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mnhj-noor-24b41968\/releases\/download\/v4\/app-release.apk"
     }
   ]
 }
