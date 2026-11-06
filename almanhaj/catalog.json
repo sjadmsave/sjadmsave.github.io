@@ -250,25 +250,6 @@
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-myapp-app3d547519-3d547519\/releases\/download\/v4\/app-release.apk"
     },
     {
-      "id": "sjadmsave\/apkstudio-com-mk-web-2cce27db",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-com-mk-web-2cce27db",
-      "tag": "v15",
-      "name": "محل المفاتيح",
-      "description": "تطبيق ادارة المخزون",
-      "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mk-web-2cce27db.png?v=95ddb61cd97d5a60",
-      "status": "published",
-      "packageName": "com.mk.web",
-      "versionCode": 15,
-      "versionName": "1.2.0.2",
-      "sha256": "1a7a815b937a95fd9da786c6241854d02dfd8b5463118744c635960293131b91",
-      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
-      "notes": "..",
-      "publishedAt": "2026-10-29",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mk-web-2cce27db\/releases\/download\/v15\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-klemat-mu-cut-342f7a0a",
       "owner": "sjadmsave",
       "repo": "apkstudio-klemat-mu-cut-342f7a0a",
@@ -343,6 +324,25 @@
       "notes": "Fixing",
       "publishedAt": "2026-11-06",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mahde-q-ef08b623\/releases\/download\/v8\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-com-mk-web-2cce27db",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-com-mk-web-2cce27db",
+      "tag": "v17",
+      "name": "محل المفاتيح",
+      "description": "تطبيق ادارة المخزون",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-com-mk-web-2cce27db.png?v=95ddb61cd97d5a60",
+      "status": "published",
+      "packageName": "com.mk.web",
+      "versionCode": 17,
+      "versionName": "1.2.0.2",
+      "sha256": "28724cb72568714f1726055ea9c881f97f38c3569d0ba584eb1c75ac47c3a52c",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "اصلاحات",
+      "publishedAt": "2026-11-06",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mk-web-2cce27db\/releases\/download\/v17\/app-release.apk"
     }
   ]
 }
