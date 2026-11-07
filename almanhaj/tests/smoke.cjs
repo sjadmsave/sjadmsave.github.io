@@ -22,6 +22,10 @@ for (const app of catalog.apps) {
 }
 assert.equal(manifest.display, 'standalone');
 for (const icon of manifest.icons) assert(fs.existsSync(path.join(root, icon.src)), icon.src + ': missing');
-for (const file of ['index.html', 'assets/store.css', 'assets/store.js']) assert(fs.existsSync(path.join(root, file)), file + ': missing');
-execFileSync(process.execPath, ['--check', path.join(root, 'assets/store.js')]);
+for (const file of ['index.html', 'assets/store.css', 'assets/store.js', 'assets/catalog-core.js', 'assets/fonts/OFL.txt']) assert(fs.existsSync(path.join(root, file)), file + ': missing');
+for (const file of ['assets/store.js', 'assets/catalog-core.js']) execFileSync(process.execPath, ['--check', path.join(root, file)]);
+const html = read('index.html');
+const idsInHtml = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+assert.equal(new Set(idsInHtml).size, idsInHtml.length, 'duplicate HTML id');
+for (const match of read('assets/store.js').matchAll(/\$\('([^']+)'\)/g)) assert(idsInHtml.includes(match[1]), 'missing DOM target: ' + match[1]);
 console.log('المنهج: نجح فحص ' + ids.size + ' تطبيقًا والملفات الأساسية.');

@@ -1,0 +1,19 @@
+name: Almanhaj storefront checks
+on:
+  pull_request:
+    paths: ['almanhaj/**', '.github/workflows/almanhaj-checks.yml']
+  push:
+    branches: ['dev/**']
+    paths: ['almanhaj/**', '.github/workflows/almanhaj-checks.yml']
+permissions:
+  contents: read
+jobs:
+  catalog-and-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node almanhaj/tests/smoke.cjs
+      - run: node --test almanhaj/tests/catalog.cjs
