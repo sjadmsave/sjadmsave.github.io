@@ -362,6 +362,25 @@
       "notes": "كتاب زهر الربيع",
       "publishedAt": "2026-11-07",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-zahr-al_rabi-0637a1fe\/releases\/download\/v1\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-hyakl-al-noor-95f011c8",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-hyakl-al-noor-95f011c8",
+      "tag": "v1",
+      "name": "هياكل النور",
+      "description": "",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-hyakl-al-noor-95f011c8.png?v=8edee1a5cb873769",
+      "status": "published",
+      "packageName": "hyakl.al.noor",
+      "versionCode": 1,
+      "versionName": "1.0.0",
+      "sha256": "bb60e8458e6daaeef89ddf2d1b456e374ba76fd40f4225299dc0c35a6e115707",
+      "certificateSha256": "06932619a8e6d0d6f1834c65b9dffe9fbe3652aa4eb23e13815f86da0a81719a",
+      "notes": "..",
+      "publishedAt": "2026-11-07",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-hyakl-al-noor-95f011c8\/releases\/download\/v1\/app-release.apk"
     }
   ]
 }
