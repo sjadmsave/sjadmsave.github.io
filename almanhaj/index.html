@@ -1,41 +1,201 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#065f46"><meta name="description" content="المنهج — متجر تطبيقات مستقل بإصدارات معتمدة"><link rel="icon" href="logo.svg"><title>المنهج | ALMANHAJ</title>
-<style>
-
-:root{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;color-scheme:light;--green:#047857;--ink:#193a32;--sub:#688078;--line:#e4ede8;--bg:#f8faf9;--card:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
-.wrap{width:min(1080px,calc(100% - 30px));margin-inline:auto}
-header{background:#fff;border-bottom:1px solid var(--line)}.top{min-height:65px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:11px}.brand img{width:42px;height:42px;border-radius:12px}.brand strong{display:block;font-size:19px;line-height:1.2}.brand small{display:block;font-size:11px;color:var(--sub);font-weight:500}.header-count{font-size:12px;font-weight:700;color:var(--green);background:#e8f7ef;padding:7px 12px;border-radius:999px}
-main{padding-top:25px;padding-bottom:38px;min-height:calc(100vh - 115px)}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:12px}.toolbar h1{font-size:21px;font-weight:800;line-height:1.3;margin:0;white-space:nowrap}.controls{width:min(400px,70%)}#search{display:block;width:100%;padding:11px 15px;border-radius:12px;border:1px solid #dce9e1;background:#fff;color:var(--ink);outline:none;font-size:14px}#search:focus{border-color:#34ad80;box-shadow:0 0 0 3px #10b9811e}
-#filters{display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;padding:4px 0 17px}#filters::-webkit-scrollbar{display:none}#filters:empty{display:none}.filter{font-size:12px;font-weight:650;padding:7px 13px;border:1px solid #dcebe2;background:#fff;border-radius:999px;color:#587369;white-space:nowrap}.filter[aria-pressed=true]{background:#047857;color:#fff;border-color:#047857}.filter:focus-visible,.dl:focus-visible,.more:focus-visible{outline:3px solid #6ee7b7;outline-offset:2px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:17px;display:flex;flex-direction:column;min-width:0}.apphead{display:flex;align-items:center;gap:12px;min-width:0}.apphead img{width:61px;height:61px;border-radius:14px;object-fit:contain;flex:none;background:#eaf7ee}.apphead>div{min-width:0}.apphead h3{margin:0 0 2px;font-size:17px;overflow-wrap:anywhere;line-height:1.4}.apphead small{color:var(--green);font-size:12px}.desc{color:var(--sub);font-size:13px;margin:10px 0 13px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;min-height:0}.desc:empty{display:none}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;margin-top:auto;border-top:1px solid var(--line);font-size:11px;color:var(--sub)}.buttons{display:flex;gap:8px;margin-top:11px}.dl,.more{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;border:0;border-radius:10px;font-weight:750;font-size:13px}.dl{background:var(--green);color:white;flex:1}.dl:hover{background:#086e52}.more{color:var(--green);background:#eaf7ef}.more:hover{background:#d8f1e4}
-.empty{grid-column:1/-1;text-align:center;border:1px dashed #cce1d5;background:#fff;border-radius:16px;padding:38px 16px}.empty>div{font-size:27px;color:var(--green)}.empty b{display:block;font-size:16px}.empty p{color:var(--sub);font-size:13px;margin:6px auto;max-width:430px}
-footer{border-top:1px solid var(--line);padding:15px 0;text-align:center;color:var(--sub);font-size:12px;background:#fff}
-dialog{border:0;border-radius:20px;padding:24px;width:min(510px,calc(100% - 30px));max-height:88vh;overflow:auto;color:var(--ink);box-shadow:0 20px 65px #05261e44}dialog::backdrop{background:#0a2518a9}.modalhead{display:flex;align-items:center;gap:12px}.modalhead img{width:70px;height:70px;border-radius:15px;object-fit:contain}.modalhead h2{font-size:20px}.close{float:left;border:0;border-radius:9px;padding:5px 12px;background:#eaf7ef;color:var(--green);font-size:22px}.modal-body,.modal-footer{clear:both}#modal-desc{font-size:14px;color:var(--sub)}dt{font-weight:700;font-size:13px}dd{color:var(--sub);font-size:13px;margin:0 0 12px;overflow-wrap:anywhere}.modal-footer{margin-top:14px}.modal-footer a{width:100%}
-@media(max-width:700px){.top{min-height:59px}.brand img{height:38px;width:38px}.brand strong{font-size:18px}main{padding-top:17px}.toolbar{gap:12px}.toolbar h1{font-size:18px}.controls{width:min(290px,72%)}#search{padding:10px 12px}.cards{grid-template-columns:1fr;gap:9px}.card{padding:13px 14px;border-radius:14px}.apphead img{height:55px;width:55px}.desc{margin:7px 0 10px}.buttons{margin-top:9px}#filters{padding-bottom:12px}}
-@media(max-width:355px){.header-count{padding:5px 9px}.toolbar h1{font-size:16px}.controls{width:65%}.apphead img{width:49px;height:49px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-</style></head>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#073e36">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="المنهج، متجر عربي مستقل لاكتشاف تطبيقات Android وتحميل إصداراتها المنشورة مع بيانات الإصدار وبصمات التحقق.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="المنهج | متجر التطبيقات">
+  <meta property="og:description" content="اكتشف تطبيقات عربية، اطّلع على إصداراتها، وحمّل ملفات APK من مصادر نشرها.">
+  <meta property="og:image" content="https://sjadmsave.github.io/almanhaj/logo.svg">
+  <link rel="canonical" href="https://sjadmsave.github.io/almanhaj/">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/store.css">
+  <script src="assets/store.js" defer></script>
+  <title>المنهج | متجر التطبيقات العربية</title>
+</head>
 <body>
-<header><div class="wrap top"><a href="./" class="brand" aria-label="المنهج - الرئيسية"><img src="logo.svg" alt=""><span><strong>المنهج</strong><small>متجر التطبيقات</small></span></a><span class="header-count" id="count">—</span></div></header>
-<main class="wrap"><section id="apps" aria-label="قائمة التطبيقات">
-<div class="toolbar"><h1>التطبيقات</h1><div class="controls"><input id="search" type="search" placeholder="ابحث عن تطبيق" aria-label="البحث في التطبيقات" autocomplete="off"></div></div>
-<div id="filters" role="group" aria-label="التصنيفات"></div>
-<div class="cards" id="cards" aria-live="polite"><div class="empty"><b>جارٍ تحميل التطبيقات...</b></div></div>
-</section></main>
-<footer>© <span id="year"></span> المنهج</footer>
-<dialog id="modal"><button class="close" id="close" aria-label="إغلاق">×</button><div class="modalhead"><img id="modal-icon" src="logo.svg" alt=""><div><h2 id="modal-name" style="margin:0"></h2><span id="modal-category"></span></div></div><p id="modal-desc"></p><dl><dt>الإصدار</dt><dd id="modal-version"></dd><dt>ما الجديد؟</dt><dd id="modal-notes"></dd><dt>اسم الحزمة</dt><dd id="modal-package" dir="ltr"></dd><dt>بصمة SHA-256</dt><dd id="modal-sha" dir="ltr"></dd></dl><div class="modal-footer"><a id="modal-link" target="_blank" rel="noopener noreferrer" class="dl">تحميل APK</a></div></dialog>
-<script>
-'use strict';(()=>{const $=id=>document.getElementById(id);$('year').textContent=new Date().getFullYear();let apps=[],category='الكل',query='';
-const https=s=>{try{return new URL(s).protocol==='https:'}catch{return false}};
-const valid=s=>{try{let u=new URL(s);return u.protocol==='https:'&&u.hostname==='github.com'&&/^\/[^/]+\/[^/]+\/releases\/download\/[^/]+\/[^/]+\.apk$/i.test(u.pathname)}catch{return false}};
-function el(tag,cls,text){let e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e}
-function render(){let cats=['الكل',...new Set(apps.map(a=>a.category||'عام'))];$('filters').replaceChildren(...(cats.length<=2?[]:cats).map(c=>{let b=el('button','filter',c);b.type='button';b.setAttribute('aria-pressed',String(c===category));b.onclick=()=>{category=c;render()};return b}));
-let visible=apps.filter(a=>(category==='الكل'||(a.category||'عام')===category)&&[a.name,a.description,a.category].join(' ').toLocaleLowerCase('ar').includes(query));$('count').textContent=visible.length+' تطبيق';$('cards').replaceChildren();
-if(!visible.length){let box=el('div','empty');box.append(el('b','',apps.length?'لا توجد نتائج مطابقة':'لا توجد تطبيقات حالياً'));$('cards').append(box);return}
-for(let a of visible){let card=el('article','card'),head=el('div','apphead'),img=el('img');img.src=https(a.icon)?a.icon:'logo.svg';img.alt='';img.loading='lazy';img.onerror=()=>{img.onerror=null;img.src='logo.svg'};let labels=el('div');labels.append(el('h3','',a.name),el('small','',a.category||'عام'));head.append(img,labels);card.append(head,el('p','desc',a.description||''));let meta=el('div','meta');meta.append(el('span','','الإصدار '+(a.versionName||'—')),el('span','',a.publishedAt||''));card.append(meta);let buttons=el('div','buttons'),link=el('a','dl','تحميل APK');link.href=a.apkUrl;link.target='_blank';link.rel='noopener noreferrer';let more=el('button','more','التفاصيل');more.type='button';more.onclick=()=>details(a);buttons.append(link,more);card.append(buttons);$('cards').append(card)}}
-function details(a){for(let [id,val] of [['name',a.name],['category',a.category||'عام'],['desc',a.description||''],['version',a.versionName||'—'],['notes',a.notes||'لا توجد ملاحظات لهذا الإصدار.'],['package',a.packageName||'—'],['sha',a.sha256||'غير متوفرة']])$('modal-'+id).textContent=val;let img=$('modal-icon');img.src=https(a.icon)?a.icon:'logo.svg';img.onerror=()=>{img.onerror=null;img.src='logo.svg'};$('modal-link').href=a.apkUrl;$('modal').showModal()}
-$('close').onclick=()=>$('modal').close();$('modal').onclick=e=>{if(e.target===$('modal'))$('modal').close()};$('search').oninput=e=>{query=e.target.value.trim().toLocaleLowerCase('ar');render()};
-fetch('./catalog.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(j=>{if(j.schema!==1||!Array.isArray(j.apps))throw Error('schema');apps=j.apps.filter(a=>a&&a.status==='published'&&typeof a.name==='string'&&a.name.length<=160&&valid(a.apkUrl));render()}).catch(()=>{apps=[];render();let p=$('cards').querySelector('.empty b');if(p)p.textContent='تعذّر تحميل التطبيقات. حاول تحديث الصفحة.'})})();
-</script></body></html>
+  <a class="skip-link" href="#catalog">تجاوز إلى التطبيقات</a>
+  <header class="site-header" id="top">
+    <div class="shell header-inner">
+      <a class="identity" href="./" aria-label="المنهج، الصفحة الرئيسية">
+        <img src="logo.svg" width="44" height="44" alt="">
+        <span class="identity-copy"><strong>المنهج</strong><small>متجر التطبيقات العربية</small></span>
+      </a>
+      <nav class="header-actions" aria-label="روابط الموقع">
+        <a class="nav-link" href="#catalog">التطبيقات</a>
+        <a class="nav-link" href="#about">عن المتجر</a>
+        <button class="theme-toggle icon-button" id="theme-toggle" type="button" aria-label="تبديل المظهر" title="تبديل المظهر">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.7A8.6 8.6 0 0 1 8.3 3.8 8.6 8.6 0 1 0 20.2 15.7Z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro shell" aria-label="اكتشف المنهج">
+      <div class="intro-copy">
+        <span class="eyebrow"><span class="signal"></span> مساحة عربية للتطبيقات</span>
+        <h1>تطبيقات مميزة.<br><span>في مكان واحد.</span></h1>
+        <p class="intro-lead">اكتشف تطبيقات نافعة للمعرفة والحياة اليومية، وتعرّف على أحدث إصداراتها قبل تحميلها مباشرة.</p>
+        <div class="intro-cta">
+          <a class="button button-light" href="#catalog">استكشف التطبيقات <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg></a>
+          <a class="intro-secondary" href="#about">كيف يعمل المتجر؟</a>
+        </div>
+        <div class="intro-stats">
+          <div><strong id="hero-count">—</strong><span>تطبيق متاح</span></div>
+          <span class="stat-divider"></span>
+          <div><strong id="hero-categories">—</strong><span>تصنيفات</span></div>
+          <span class="stat-divider"></span>
+          <div><strong>APK</strong><span>تحميل مباشر</span></div>
+        </div>
+      </div>
+      <div class="spotlight-shell">
+        <div class="spotlight-decoration spotlight-orb"></div>
+        <div class="spotlight-decoration spotlight-ring"></div>
+        <article class="spotlight" id="spotlight" aria-label="أحدث إضافة">
+          <span class="spotlight-label"><span class="live-dot"></span> من أحدث الإضافات</span>
+          <div class="spotlight-app">
+            <img id="spotlight-icon" src="logo.svg" width="78" height="78" alt="">
+            <div><span class="spotlight-overline">اكتشف تطبيقًا</span><h2 id="spotlight-name">المنهج</h2><p id="spotlight-description">تطبيقات عربية متنوعة</p></div>
+          </div>
+          <div class="spotlight-bottom">
+            <span id="spotlight-version">أحدث إصدار</span>
+            <button id="spotlight-details" type="button" class="spotlight-action" disabled>استعرض التفاصيل <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg></button>
+          </div>
+        </article>
+        <div class="floating-mark" aria-hidden="true">✳</div>
+      </div>
+    </section>
+
+    <section class="store-section shell" id="catalog" aria-labelledby="catalog-title">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">مكتبة المنهج</span>
+          <h2 id="catalog-title">اكتشف ما يناسبك</h2>
+          <p>تصفح التطبيقات حسب المجال، أو ابحث عمّا تحتاجه.</p>
+        </div>
+        <div class="available-badge"><span class="badge-dot"></span><span id="total-count">جاري التحميل...</span></div>
+      </div>
+
+      <div class="catalog-panel">
+        <div class="search-row">
+          <label class="search-box" for="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.7"/><path d="m16 16 5 5"/></svg>
+            <input id="search" type="search" placeholder="ابحث باسم التطبيق أو مجاله..." autocomplete="off" enterkeyhint="search">
+            <span class="search-hint">بحث سريع</span>
+          </label>
+          <label class="sort-box" for="sort">
+            <span>الترتيب</span>
+            <select id="sort">
+              <option value="newest">الأحدث نشرًا</option>
+              <option value="oldest">الأقدم نشرًا</option>
+              <option value="name">الاسم: أ - ي</option>
+              <option value="name-desc">الاسم: ي - أ</option>
+            </select>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </label>
+        </div>
+        <div class="filter-row">
+          <div class="category-scroll" id="filters" role="group" aria-label="تصفية حسب التصنيف"></div>
+          <button class="favorite-filter" id="favorites-toggle" type="button" aria-pressed="false" title="التطبيقات المحفوظة">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 8.8c0 5.1-8.5 10.5-8.5 10.5S3.5 13.9 3.5 8.8a4.6 4.6 0 0 1 8.5-2.3 4.6 4.6 0 0 1 8.5 2.3Z"/></svg>
+            <span>المحفوظة</span><span class="favorite-number" id="favorites-count">0</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="results-line">
+        <p id="result-summary" role="status" aria-live="polite">جارٍ تحميل التطبيقات...</p>
+        <button id="clear-filters" class="clear-filters" type="button" hidden>مسح التصفية</button>
+      </div>
+      <div class="app-grid" id="cards" aria-label="قائمة التطبيقات">
+        <div class="loading-card"></div><div class="loading-card"></div><div class="loading-card"></div>
+      </div>
+    </section>
+
+    <section class="assurance shell" id="about" aria-labelledby="about-title">
+      <div class="assurance-heading">
+        <span class="section-kicker">التجربة والشفافية</span>
+        <h2 id="about-title">تعرّف قبل أن تحمّل.</h2>
+        <p>نقدّم لك بيانات كل إصدار، ونوجّهك إلى ملفه المنشور على GitHub Releases. التحميل والتثبيت يتمان خارج هذا الموقع.</p>
+      </div>
+      <div class="assurance-grid">
+        <div class="assurance-item"><span class="assurance-icon">01</span><h3>إصدارات واضحة</h3><p>رقم الإصدار وتاريخ نشره وملاحظات التحديث عند توفرها.</p></div>
+        <div class="assurance-item"><span class="assurance-icon">02</span><h3>معلومات التحقق</h3><p>بصمة SHA-256 للملف وبصمة شهادة التوقيع المعروضة من بيانات النشر.</p></div>
+        <div class="assurance-item"><span class="assurance-icon">03</span><h3>وصول مباشر</h3><p>روابط تحميل مستقلة من إصدارات GitHub، دون إعادة استضافة ملفات APK هنا.</p></div>
+      </div>
+      <details class="install-guide">
+        <summary>كيفية تثبيت ملف APK على Android <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <ol>
+          <li>اختر التطبيق، واقرأ تفاصيل إصداره ثم اضغط «تحميل APK».</li>
+          <li>افتح الملف بعد اكتمال التنزيل، وراجع اسم التطبيق وطلب التثبيت.</li>
+          <li>قد يطلب Android السماح بالتثبيت من هذا المصدر؛ فعّل الإذن للمصدر الذي تثق به فقط، ثم أوقفه عند الانتهاء إن لم تعد تحتاجه.</li>
+        </ol>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <a class="footer-brand" href="./"><img src="logo.svg" width="32" height="32" alt=""> المنهج</a>
+      <p>مساحة تجمع تطبيقات عربية في مكان واحد.</p>
+      <span>© <span id="year"></span> المنهج</span>
+    </div>
+  </footer>
+
+  <nav class="mobile-nav" aria-label="التنقل الأساسي للهاتف">
+    <a href="#top" class="mobile-tab" id="mobile-home" aria-label="الرئيسية">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg>
+      <span>الرئيسية</span>
+    </a>
+    <a href="#catalog" class="mobile-tab is-current" id="mobile-catalog" aria-label="التطبيقات" aria-current="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+      <span>التطبيقات</span>
+    </a>
+    <button class="mobile-tab" id="mobile-saved" type="button" aria-label="التطبيقات المحفوظة">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 8.8c0 5.1-8.5 10.5-8.5 10.5S3.5 13.9 3.5 8.8a4.6 4.6 0 0 1 8.5-2.3 4.6 4.6 0 0 1 8.5 2.3Z"/></svg>
+      <span>المحفوظة</span>
+    </button>
+  </nav>
+
+  <dialog id="details-modal" aria-labelledby="modal-name" aria-modal="true">
+    <div class="dialog-layout">
+      <div class="dialog-top"><span class="dialog-eyebrow">تفاصيل التطبيق</span><button id="modal-close" class="modal-close icon-button" type="button" aria-label="إغلاق التفاصيل">×</button></div>
+      <div class="dialog-app">
+        <img id="modal-icon" src="logo.svg" width="88" height="88" alt="">
+        <div><span id="modal-category" class="mini-category"></span><h2 id="modal-name"></h2><p id="modal-description"></p></div>
+      </div>
+      <div class="dialog-meta">
+        <div><span>الإصدار</span><strong id="modal-version"></strong></div>
+        <div><span>تاريخ النشر</span><strong id="modal-date"></strong></div>
+      </div>
+      <section class="release-notes"><h3>ما الجديد في هذا الإصدار؟</h3><p id="modal-notes"></p></section>
+      <details class="technical-info">
+        <summary>المعلومات التقنية والتحقق <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <dl>
+          <dt>اسم الحزمة</dt><dd id="modal-package" dir="ltr"></dd>
+          <dt>رمز الإصدار</dt><dd id="modal-code" dir="ltr"></dd>
+          <dt>بصمة ملف APK (SHA-256)</dt><dd><span id="modal-sha" dir="ltr"></span><button class="copy-button" data-copy="modal-sha" type="button">نسخ</button></dd>
+          <dt>بصمة شهادة التوقيع (SHA-256)</dt><dd><span id="modal-cert" dir="ltr"></span><button class="copy-button" data-copy="modal-cert" type="button">نسخ</button></dd>
+        </dl>
+        <p>هذه البيانات مأخوذة من سجل النشر؛ للتحقق من سلامة الملف قارِن بصمته بعد التنزيل.</p>
+      </details>
+      <div class="dialog-actions">
+        <a id="modal-download" class="button button-download" href="#" target="_blank" rel="noopener noreferrer">تحميل APK <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></a>
+        <button id="modal-save" class="button button-save" type="button">حفظ التطبيق <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 8.8c0 5.1-8.5 10.5-8.5 10.5S3.5 13.9 3.5 8.8a4.6 4.6 0 0 1 8.5-2.3 4.6 4.6 0 0 1 8.5 2.3Z"/></svg></button>
+      </div>
+      <p id="toast" class="dialog-toast" role="status" aria-live="polite"></p>
+    </div>
+  </dialog>
+</body>
+</html>

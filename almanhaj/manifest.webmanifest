@@ -1,0 +1,17 @@
+{
+  "name": "المنهج | متجر التطبيقات",
+  "short_name": "المنهج",
+  "description": "متجر تطبيقات Android العربي",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f8f5",
+  "theme_color": "#073e36",
+  "icons": [
+    {"src":"icons/store-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icons/store-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
