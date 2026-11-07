@@ -22,25 +22,6 @@
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-khtab-j-0e8ed427\/releases\/download\/v9\/app-release.apk"
     },
     {
-      "id": "sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-wrqah-sual-iq-e0b4a23b",
-      "tag": "v2",
-      "name": "ورقتي",
-      "description": "انشاء ورقة الاسئلة باسلوب سهل",
-      "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-wrqah-sual-iq-e0b4a23b.png?v=6efdcd30ff6d0350",
-      "status": "published",
-      "packageName": "wrqah.sual.iq",
-      "versionCode": 2,
-      "versionName": "1.0.2",
-      "sha256": "6e6fd503b66ea812061306064fdbe8ef8697a2f032bb891aa57a9e9e08b96a8b",
-      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
-      "notes": "اصلاح",
-      "publishedAt": "2026-10-20",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b\/releases\/download\/v2\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-com-myapp-app394e585f-861bb793",
       "owner": "sjadmsave",
       "repo": "apkstudio-com-myapp-app394e585f-861bb793",
@@ -381,6 +362,25 @@
       "notes": "..",
       "publishedAt": "2026-11-07",
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-hyakl-al-noor-95f011c8\/releases\/download\/v1\/app-release.apk"
+    },
+    {
+      "id": "sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b",
+      "owner": "sjadmsave",
+      "repo": "apkstudio-wrqah-sual-iq-e0b4a23b",
+      "tag": "v4",
+      "name": "ورقتي",
+      "description": "انشاء ورقة الاسئلة باسلوب سهل",
+      "category": "أدوات",
+      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-wrqah-sual-iq-e0b4a23b.png?v=d401230d55cc1d12",
+      "status": "published",
+      "packageName": "wrqah.sual.iq",
+      "versionCode": 4,
+      "versionName": "1.1.2",
+      "sha256": "8d690991de6aeba2443a517bfa1316fce258205815d42a366ef4c57b483c4b03",
+      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
+      "notes": "..",
+      "publishedAt": "2026-11-07",
+      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-wrqah-sual-iq-e0b4a23b\/releases\/download\/v4\/app-release.apk"
     }
   ]
 }
