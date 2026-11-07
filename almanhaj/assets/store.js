@@ -1,407 +1,490 @@
-/* المنهج — واجهة المتجر. بيانات التطبيقات تأتي حصراً من catalog.json. */
+/* المنهج: واجهة عربية مستقلة. يظل catalog.json مصدر النشر الوحيد. */
 (() => {
   'use strict';
-
   const $ = id => document.getElementById(id);
+  const Core = window.AlmanhajCatalog;
   const favoritesKey = 'almanhaj:favorites:v1';
   const themeKey = 'almanhaj:theme:v1';
-  const collator = new Intl.Collator('ar', { sensitivity: 'base', numeric: true });
+  const sortLabels = { newest: 'الأحدث', oldest: 'الأقدم', name: 'الاسم: أ – ي', 'name-desc': 'الاسم: ي – أ' };
+  const views = new Set(['discover', 'categories', 'saved', 'about']);
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const systemTheme = matchMedia('(prefers-color-scheme: dark)');
   const state = {
-    apps: [],
-    category: 'الكل',
-    query: '',
-    sort: 'newest',
-    favoritesOnly: false,
-    favorites: new Set(readSaved(favoritesKey, [])),
-    current: null,
-    lastFocus: null,
-    loadError: false
+    apps: [], favorites: Core.savedIds(readLocal(favoritesKey)), route: readRoute(),
+    loading: true, loadError: false, loaded: false, current: null,
+    focusOrigin: null, focusKey: '', controller: null, lastLoaded: 0
   };
-  const heartSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 8.8c0 5.1-8.5 10.5-8.5 10.5S3.5 13.9 3.5 8.8a4.6 4.6 0 0 1 8.5-2.3 4.6 4.6 0 0 1 8.5 2.3Z"/></svg>';
-  const downloadSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>';
+  let toastTimer;
 
-  function readSaved(key, fallback) {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(key));
-      return Array.isArray(parsed) && parsed.every(x => typeof x === 'string') ? parsed : fallback;
-    } catch { return fallback; }
+  function readLocal(key) { try { return localStorage.getItem(key); } catch { return null; } }
+  function writeLocal(key, value) { try { localStorage.setItem(key, value); return true; } catch { return false; } }
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = String(text);
+    return node;
   }
-  function setSaved(key, value) {
-    try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private browsing */ }
+  function svg(name, className) {
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('aria-hidden', 'true');
+    if (className) icon.setAttribute('class', className);
+    const use = document.createElementNS(icon.namespaceURI, 'use');
+    use.setAttribute('href', '#i-' + name);
+    icon.append(use);
+    return icon;
   }
-  function node(tag, className, text) {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text !== undefined) element.textContent = String(text);
-    return element;
-  }
-  function safeHttps(url) {
-    try {
-      const parsed = new URL(url);
-      return parsed.protocol === 'https:' ? parsed.href : '';
-    } catch { return ''; }
-  }
-  function validIcon(url) {
-    const safe = safeHttps(url);
-    return safe && new URL(safe).hostname === 'sjadmsave.github.io' ? safe : 'logo.svg';
-  }
-  function validDownload(url) {
-    try {
-      const parsed = new URL(url);
-      return parsed.protocol === 'https:' &&
-        parsed.hostname === 'github.com' &&
-        /^\/[^/]+\/[^/]+\/releases\/download\/[^/]+\/[^/]+\.apk$/i.test(parsed.pathname);
-    } catch { return false; }
-  }
-  function normalize(text) {
-    return String(text || '')
-      .normalize('NFKC')
-      .toLocaleLowerCase('ar')
-      .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
-      .replace(/[أإآٱ]/g, 'ا')
-      .replace(/ؤ/g, 'و')
-      .replace(/ئ|ى/g, 'ي')
-      .replace(/ة/g, 'ه')
-      .replace(/[٠-٩]/g, n => String(n.charCodeAt(0) - 0x660))
-      .replace(/[۰-۹]/g, n => String(n.charCodeAt(0) - 0x6f0))
-      .trim();
+  function appIcon(app, className, eager = false) {
+    const image = el('img', className);
+    image.src = app.icon;
+    image.alt = '';
+    image.width = image.height = eager ? 84 : 64;
+    image.loading = eager ? 'eager' : 'lazy';
+    image.decoding = 'async';
+    image.addEventListener('error', () => { image.src = 'logo.svg'; }, { once: true });
+    return image;
   }
   function formatDate(value) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return 'غير محدد';
-    const date = new Date(value + 'T12:00:00Z');
-    return Number.isNaN(date.valueOf()) ? 'غير محدد' :
-      new Intl.DateTimeFormat('ar-IQ', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }).format(date);
+    return value ? new Intl.DateTimeFormat('ar-IQ', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+      .format(new Date(value + 'T12:00:00Z')) : 'غير محدد';
   }
-  function isoDate(value) { return /^\d{4}-\d{2}-\d{2}$/.test(value || '') ? value : '0000-00-00'; }
-  function icon(element, app) {
-    element.src = validIcon(app.icon);
-    element.alt = '';
-    element.loading = 'lazy';
-    element.onerror = () => { element.onerror = null; element.src = 'logo.svg'; };
+  function notify(message) {
+    clearTimeout(toastTimer);
+    $('snackbar').textContent = message;
+    $('snackbar').hidden = false;
+    toastTimer = setTimeout(() => { $('snackbar').hidden = true; }, 3800);
   }
-
-  function updateTheme() {
-    let stored = null;
-    try { stored = localStorage.getItem(themeKey); } catch {}
-    const dark = stored === 'dark' || (!stored && matchMedia('(prefers-color-scheme: dark)').matches);
+  function setTheme(theme) {
+    const dark = theme === 'dark' || (theme !== 'light' && systemTheme.matches);
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    $('theme-toggle').replaceChildren(svg(dark ? 'sun' : 'moon'));
     $('theme-toggle').setAttribute('aria-label', dark ? 'تفعيل المظهر الفاتح' : 'تفعيل المظهر الداكن');
-    $('theme-toggle').setAttribute('title', dark ? 'المظهر الفاتح' : 'المظهر الداكن');
-    $('theme-toggle').innerHTML = dark
-      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
-      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.7A8.6 8.6 0 0 1 8.3 3.8 8.6 8.6 0 1 0 20.2 15.7Z"/></svg>';
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#101713' : '#f9fbf8';
   }
   $('theme-toggle').addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem(themeKey, next); } catch {}
-    updateTheme();
+    setTheme(next);
+    writeLocal(themeKey, next);
   });
-  updateTheme();
+  systemTheme.addEventListener('change', () => {
+    const saved = readLocal(themeKey);
+    if (saved !== 'dark' && saved !== 'light') setTheme(null);
+  });
+  setTheme(readLocal(themeKey));
   $('year').textContent = String(new Date().getFullYear());
+  document.querySelector('.skip-link').addEventListener('click', event => {
+    event.preventDefault(); focusHeading(); $('content').scrollIntoView({ block: 'start' });
+  });
 
-  // Bottom navigation with Android-sized touch areas; no page reloads.
-  function setMobileTab(id) {
-    for (const tab of document.querySelectorAll('.mobile-tab')) {
-      const active = tab.id === id;
-      tab.classList.toggle('is-current', active);
-      if (active) tab.setAttribute('aria-current', 'page');
-      else tab.removeAttribute('aria-current');
+  function readRoute() {
+    const params = new URLSearchParams(location.hash.slice(1));
+    return {
+      view: views.has(params.get('view')) ? params.get('view') : 'discover',
+      category: (params.get('category') || 'الكل').slice(0, 80),
+      query: (params.get('q') || '').slice(0, 150),
+      sort: Object.hasOwn(sortLabels, params.get('sort')) ? params.get('sort') : 'newest',
+      app: (params.get('app') || '').slice(0, 300),
+      sheet: params.get('sheet') === 'sort' ? 'sort' : ''
+    };
+  }
+  function routeHash(route) {
+    const params = new URLSearchParams({ view: route.view });
+    if (route.category !== 'الكل') params.set('category', route.category);
+    if (route.query) params.set('q', route.query);
+    if (route.sort !== 'newest') params.set('sort', route.sort);
+    if (route.app) params.set('app', route.app);
+    else if (route.sheet) params.set('sheet', route.sheet);
+    return '#' + params.toString();
+  }
+  function navigate(changes, { replace = false, top = false, focus = false } = {}) {
+    const next = { ...state.route, ...changes };
+    const hash = routeHash(next);
+    const overlay = Boolean(next.app || next.sheet);
+    history.replaceState({ ...history.state, scroll: scrollY }, '', location.href);
+    if (hash !== location.hash) {
+      history[replace ? 'replaceState' : 'pushState']({ store: true, scroll: top ? 0 : scrollY, overlay: !replace && overlay }, '', hash);
+    }
+    applyRoute({ top, focus });
+  }
+  function closeSheet() {
+    if (history.state?.overlay) history.back();
+    else navigate({ app: '', sheet: '' }, { replace: true });
+  }
+  function focusHeading() {
+    const id = state.route.view === 'categories' ? 'categories-title' : state.route.view === 'about' ? 'about-title' : 'page-title';
+    $(id).focus({ preventScroll: true });
+  }
+  function applyRoute({ top = false, focus = false, restore = false } = {}) {
+    state.route = readRoute();
+    const route = state.route;
+    const catalogVisible = route.view === 'discover' || route.view === 'saved';
+    $('catalog-view').hidden = !catalogVisible;
+    $('categories-view').hidden = route.view !== 'categories';
+    $('about-view').hidden = route.view !== 'about';
+    document.querySelectorAll('.nav-item').forEach(item => {
+      const current = item.dataset.view === route.view;
+      item.classList.toggle('is-current', current);
+      if (current) item.setAttribute('aria-current', 'page');
+      else item.removeAttribute('aria-current');
+    });
+    if (document.activeElement !== $('search')) $('search').value = route.query;
+    $('clear-search').hidden = !route.query;
+    $('page-kicker').textContent = route.view === 'saved' ? 'قائمتك، على ذوقك' : 'اختياراتك تبدأ هنا';
+    $('page-title').textContent = route.view === 'saved' ? 'تطبيقاتك المحفوظة' : 'تطبيقات تناسب يومك';
+    $('list-title').textContent = route.query ? 'نتائج البحث' : route.view === 'saved' ? 'المحفوظة' : route.category !== 'الكل' ? route.category : 'اكتشف التطبيقات';
+    $('sort-label').textContent = sortLabels[route.sort];
+    updateFilters();
+    renderCards();
+    $('featured-section').hidden = !state.apps.length || route.view !== 'discover' || !!route.query || route.category !== 'الكل' || state.loadError;
+    syncSheets();
+    if (top) window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    else if (restore) requestAnimationFrame(() => window.scrollTo({ top: history.state?.scroll || 0, behavior: 'instant' }));
+    if (focus) focusHeading();
+    document.title = route.app && state.current ? state.current.name + ' | المنهج' :
+      route.view === 'saved' ? 'المحفوظة | المنهج' : route.view === 'categories' ? 'التصنيفات | المنهج' : 'المنهج | متجر التطبيقات العربية';
+  }
+  history.scrollRestoration = 'manual';
+  history.replaceState({ store: true, scroll: scrollY, overlay: false }, '', location.href);
+  addEventListener('popstate', () => applyRoute({ restore: true }));
+  addEventListener('hashchange', () => { if (routeHash(readRoute()) !== routeHash(state.route)) applyRoute(); });
+
+  function categoryCounts() {
+    const counts = new Map();
+    state.apps.forEach(app => counts.set(app.category, (counts.get(app.category) || 0) + 1));
+    return counts;
+  }
+  function categoryIcon(category) {
+    return category === 'ترفيه' ? 'game' : /علم|تعليم/.test(category) ? 'book' : 'tools';
+  }
+  function buildCategories() {
+    const filters = document.createDocumentFragment();
+    for (const category of ['الكل', ...categoryCounts().keys()]) {
+      const button = el('button', 'filter');
+      button.type = 'button';
+      button.dataset.category = category;
+      button.dataset.key = 'filter:' + category;
+      button.append(svg('check'), el('span', '', category));
+      filters.append(button);
+    }
+    $('filters').replaceChildren(filters);
+    const grid = document.createDocumentFragment();
+    for (const [category, count] of categoryCounts()) {
+      const button = el('button', 'category-card');
+      button.type = 'button';
+      button.dataset.category = category;
+      const copy = el('span', 'category-copy');
+      copy.append(el('strong', '', category), el('small', '', count + ' تطبيق'));
+      button.append(svg(categoryIcon(category)), copy, svg('arrow', 'category-arrow'));
+      grid.append(button);
+    }
+    if (!state.apps.length) grid.append(emptyState());
+    $('category-grid').replaceChildren(grid);
+    updateFilters();
+  }
+  function updateFilters() {
+    document.querySelectorAll('.filter').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === state.route.category)));
+  }
+  function favoriteButton(app) {
+    const saved = state.favorites.has(app.id);
+    const button = el('button', 'card-favorite');
+    button.type = 'button';
+    button.dataset.save = app.id;
+    button.dataset.key = 'save:' + app.id;
+    button.setAttribute('aria-pressed', String(saved));
+    button.setAttribute('aria-label', (saved ? 'إزالة ' : 'حفظ ') + app.name + (saved ? ' من المحفوظة' : ''));
+    button.append(svg('heart'));
+    return button;
+  }
+  function card(app) {
+    const article = el('article', 'app-card');
+    article.dataset.appId = app.id;
+    const main = el('button', 'app-main');
+    main.type = 'button';
+    main.dataset.details = app.id;
+    main.dataset.key = 'details:' + app.id;
+    main.setAttribute('aria-label', 'تفاصيل ' + app.name);
+    const copy = el('div', 'card-copy');
+    copy.append(el('h3', '', app.name), el('span', 'card-category', app.category + ' · ' + (app.versionName || 'APK')),
+      el('p', 'card-description', app.description || 'اكتشف تفاصيل هذا التطبيق'));
+    main.append(appIcon(app, 'card-icon'), copy);
+    const actions = el('div', 'card-actions');
+    const download = el('a', 'card-download', 'تحميل');
+    download.href = app.apkUrl;
+    download.target = '_blank';
+    download.rel = 'noopener noreferrer';
+    download.setAttribute('aria-label', 'تحميل ' + app.name + ' APK');
+    actions.append(download, favoriteButton(app));
+    article.append(main, actions);
+    return article;
+  }
+  function emptyState() {
+    const error = state.loadError;
+    const filtered = !!state.route.query || state.route.category !== 'الكل';
+    const saved = state.route.view === 'saved';
+    const container = el('div', 'empty-state');
+    const mark = el('span', 'empty-icon');
+    mark.append(svg(error ? 'refresh' : saved ? 'heart' : 'search'));
+    const title = error ? 'تعذّر تحميل التطبيقات' : filtered ? 'لا توجد نتائج مطابقة' : saved ? 'كل ما يعجبك، في مكان واحد' : 'لا توجد تطبيقات منشورة حاليًا';
+    const description = error ? 'تحقق من الاتصال بالإنترنت، ثم حاول مرة أخرى.' : filtered ? 'جرّب اسمًا آخر أو تصنيفًا مختلفًا.' : saved ? 'اضغط القلب بجانب أي تطبيق لحفظه والعودة إليه لاحقًا.' : 'ستظهر التطبيقات هنا بعد اعتماد نشرها.';
+    const button = el('button', 'button tonal-button', error ? 'إعادة المحاولة' : filtered ? 'مسح التصفية' : 'اكتشف التطبيقات');
+    button.type = 'button';
+    button.dataset.emptyAction = error ? 'reload' : filtered ? 'clear' : 'discover';
+    container.append(mark, el('h3', '', title), el('p', '', description), button);
+    return container;
+  }
+  function renderCards() {
+    const activeKey = document.activeElement?.dataset.key;
+    const fragment = document.createDocumentFragment();
+    const list = Core.filterApps(state.apps, {
+      category: state.route.category, query: state.route.query, sort: state.route.sort,
+      savedOnly: state.route.view === 'saved', favorites: state.favorites
+    });
+    if (state.loading && !state.loaded) {
+      for (let i = 0; i < 4; i++) fragment.append(el('div', 'skeleton-card'));
+    } else if (!list.length) fragment.append(emptyState());
+    else list.forEach(app => fragment.append(card(app)));
+    $('cards').replaceChildren(fragment);
+    $('cards').setAttribute('aria-busy', String(state.loading));
+    $('result-summary').textContent = state.loading ? 'جارٍ تحديث التطبيقات…' : state.loadError ? 'القائمة غير متاحة مؤقتًا' :
+      list.length + ' تطبيق' + (state.route.query ? ' مطابق للبحث' : state.route.view === 'saved' ? ' في قائمتك' : ' متاح للتحميل');
+    const filtered = !!state.route.query || state.route.category !== 'الكل';
+    $('active-filter').hidden = !filtered;
+    $('filter-description').textContent = [state.route.query ? 'البحث: ' + state.route.query : '', state.route.category !== 'الكل' ? state.route.category : ''].filter(Boolean).join(' · ');
+    if (activeKey) document.querySelectorAll('[data-key]').forEach(button => {
+      if (button.dataset.key === activeKey) button.focus({ preventScroll: true });
+    });
+  }
+  function buildFeatured() {
+    const rail = document.createDocumentFragment();
+    Core.filterApps(state.apps).slice(0, 4).forEach((app, index) => {
+      const button = el('button', 'featured-card tone-' + index);
+      button.type = 'button';
+      button.dataset.details = app.id;
+      button.dataset.key = 'featured:' + app.id;
+      button.setAttribute('aria-label', 'اكتشف ' + app.name);
+      const main = el('div', 'featured-main');
+      const copy = el('div');
+      copy.append(el('span', 'mini-label', 'جديد في المنهج'), el('h3', '', app.name), el('p', '', app.description || 'تعرّف على هذا التطبيق وإصداره.'));
+      main.append(copy, appIcon(app, '', index === 0));
+      const footer = el('div', 'featured-foot');
+      footer.append(el('span', '', app.category + ' · الإصدار ' + (app.versionName || '—')), svg('arrow'));
+      button.append(main, footer);
+      rail.append(button);
+    });
+    $('featured-rail').replaceChildren(rail);
+  }
+  function updateFavorites() {
+    const count = state.apps.filter(app => state.favorites.has(app.id)).length;
+    $('saved-badge').textContent = String(count);
+    $('saved-badge').hidden = !count;
+    updateModalFavorite();
+  }
+  function toggleFavorite(app) {
+    const saved = state.favorites.has(app.id);
+    if (saved) state.favorites.delete(app.id);
+    else state.favorites.add(app.id);
+    const persisted = writeLocal(favoritesKey, JSON.stringify([...state.favorites]));
+    renderCards();
+    updateFavorites();
+    notify((saved ? 'أُزيل التطبيق من محفوظاتك' : 'أُضيف التطبيق إلى محفوظاتك') + (persisted ? '' : ' · الحفظ متاح لهذه الجلسة فقط'));
+  }
+  function clearFilters() { navigate({ query: '', category: 'الكل' }, { replace: true }); }
+
+  // One delegated listener keeps the app list responsive as search and filters change.
+  document.addEventListener('click', event => {
+    const target = event.target instanceof Element ? event.target.closest('[data-view],[data-category],[data-details],[data-save],[data-empty-action]') : null;
+    if (!target || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    if (target.dataset.view) {
+      event.preventDefault();
+      navigate({ view: target.dataset.view, category: 'الكل', query: '', app: '', sheet: '' }, { top: true, focus: true });
+    } else if (target.dataset.category) {
+      navigate({ view: state.route.view === 'saved' ? 'saved' : 'discover', category: target.dataset.category, app: '', sheet: '' }, { top: state.route.view === 'categories' });
+    } else if (target.dataset.details) {
+      state.focusOrigin = target;
+      state.focusKey = target.dataset.key || '';
+      navigate({ app: target.dataset.details, sheet: '' });
+    } else if (target.dataset.save) {
+      const app = state.apps.find(item => item.id === target.dataset.save);
+      if (app) toggleFavorite(app);
+    } else if (target.dataset.emptyAction === 'reload') loadCatalog();
+    else if (target.dataset.emptyAction === 'clear') clearFilters();
+    else navigate({ view: 'discover', category: 'الكل', query: '' }, { top: true, focus: true });
+  });
+  $('search').addEventListener('input', event => {
+    const view = state.route.view === 'saved' ? 'saved' : 'discover';
+    navigate({ view, query: event.target.value, app: '', sheet: '' }, { replace: state.route.view === view });
+  });
+  $('search-form').addEventListener('submit', event => {
+    event.preventDefault();
+    $('search').blur();
+    $('list-title').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' });
+  });
+  $('clear-search').addEventListener('click', () => { navigate({ query: '' }, { replace: true }); $('search').value = ''; $('search').focus(); });
+  $('clear-filters').addEventListener('click', clearFilters);
+  $('show-latest').addEventListener('click', () => {
+    navigate({ view: 'discover', category: 'الكل', query: '', sort: 'newest' });
+    $('list-title').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' });
+  });
+
+  function fill(id, value) { $(id).textContent = value === null || value === undefined || value === '' ? 'غير متوفر' : String(value); }
+  function updateModalFavorite() {
+    if (!state.current) return;
+    const saved = state.favorites.has(state.current.id);
+    $('modal-save').setAttribute('aria-pressed', String(saved));
+    $('modal-save').querySelector('span').textContent = saved ? 'محفوظ' : 'حفظ التطبيق';
+  }
+  function restoreOriginFocus() {
+    const origin = state.focusOrigin?.isConnected ? state.focusOrigin : [...document.querySelectorAll('[data-key]')].find(item => item.dataset.key === state.focusKey);
+    if (origin) origin.focus({ preventScroll: true });
+    else focusHeading();
+    state.focusOrigin = null;
+    state.focusKey = '';
+  }
+  function syncSheets() {
+    const app = state.apps.find(item => item.id === state.route.app);
+    const modal = $('details-modal');
+    if (app) {
+      if (state.current !== app || !modal.open) {
+        state.current = app;
+        fill('modal-name', app.name); fill('modal-category', app.category); fill('modal-category-stat', app.category);
+        fill('modal-description', app.description || 'لم يُضف وصف لهذا التطبيق.');
+        fill('modal-version', app.versionName); fill('modal-date', formatDate(app.publishedAt));
+        fill('modal-notes', app.notes && !/^[.\s]*$/.test(app.notes) ? app.notes : 'لم تُضف ملاحظات لهذا الإصدار.');
+        fill('modal-package', app.packageName); fill('modal-code', app.versionCode);
+        fill('modal-sha', app.sha256); fill('modal-cert', app.certificateSha256);
+        const image = $('modal-icon');
+        image.onerror = () => { image.onerror = null; image.src = 'logo.svg'; };
+        image.src = app.icon;
+        $('modal-download').href = app.apkUrl;
+        const release = new URL(app.apkUrl);
+        release.pathname = release.pathname.split('/releases/download/')[0] + '/releases/tag/' + release.pathname.split('/releases/download/')[1].split('/')[0];
+        release.search = ''; release.hash = '';
+        $('modal-release').href = release.href;
+        document.querySelectorAll('[data-copy]').forEach(button => { button.disabled = !/^[a-f\d]{64}$/i.test($(button.dataset.copy).textContent); });
+        modal.querySelector('.technical-info').open = false;
+        $('share-fallback').hidden = true;
+        if ($('sort-modal').open) $('sort-modal').close();
+        if (!modal.open) modal.showModal();
+        modal.scrollTop = 0;
+        $('modal-close').focus({ preventScroll: true });
+      }
+      updateModalFavorite();
+    } else {
+      state.current = null;
+      if (modal.open) { modal.close(); restoreOriginFocus(); }
+      if (state.route.app && state.loaded && !state.loading) {
+        notify(state.loadError ? 'تعذّر قراءة بيانات هذا التطبيق. أعد المحاولة.' : 'هذا التطبيق غير متاح في الكتالوج الحالي');
+        state.route.app = '';
+        history.replaceState({ ...history.state, overlay: false }, '', routeHash(state.route));
+      }
+    }
+    const sort = $('sort-modal');
+    if (!app && state.route.sheet === 'sort') {
+      sort.querySelectorAll('input').forEach(radio => { radio.checked = radio.value === state.route.sort; });
+      if (!sort.open) { sort.showModal(); sort.querySelector(':checked').focus(); }
+    } else if (sort.open) { sort.close(); $('sort-open').focus({ preventScroll: true }); }
+  }
+  $('modal-close').addEventListener('click', closeSheet);
+  $('sort-close').addEventListener('click', closeSheet);
+  $('sort-open').addEventListener('click', () => navigate({ sheet: 'sort', app: '' }));
+  $('sort-form').addEventListener('change', event => {
+    if (Object.hasOwn(sortLabels, event.target.value)) navigate({ sort: event.target.value, sheet: '' }, { replace: true });
+  });
+  document.querySelectorAll('dialog').forEach(dialog => {
+    dialog.addEventListener('cancel', event => { event.preventDefault(); closeSheet(); });
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeSheet();
+    });
+    const handle = dialog.querySelector('.sheet-handle');
+    let start = null;
+    handle.addEventListener('pointerdown', event => { start = event.clientY; handle.setPointerCapture(event.pointerId); });
+    handle.addEventListener('pointerup', event => { if (start !== null && event.clientY - start > 65) closeSheet(); start = null; });
+    handle.addEventListener('pointercancel', () => { start = null; });
+  });
+  $('modal-save').addEventListener('click', () => { if (state.current) toggleFavorite(state.current); });
+  document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+    const value = $(button.dataset.copy).textContent;
+    if (!/^[a-f\d]{64}$/i.test(value)) return;
+    try { await navigator.clipboard.writeText(value); notify('نُسخت البصمة إلى الحافظة'); }
+    catch { notify('تعذّر النسخ التلقائي. يمكنك تحديد البصمة ونسخها يدويًا.'); }
+  }));
+  $('modal-share').addEventListener('click', async () => {
+    const app = state.current;
+    if (!app) return;
+    const url = new URL(location.href);
+    url.hash = new URLSearchParams({ view: 'discover', app: app.id }).toString();
+    if (navigator.share) {
+      try { await navigator.share({ title: app.name + ' | المنهج', url: url.href }); return; }
+      catch (error) { if (error.name === 'AbortError') return; }
+    }
+    try { await navigator.clipboard.writeText(url.href); notify('نُسخ رابط التطبيق'); }
+    catch { $('share-url').value = url.href; $('share-fallback').hidden = false; $('share-url').focus(); $('share-url').select(); }
+  });
+
+  async function loadCatalog() {
+    state.controller?.abort();
+    const controller = new AbortController();
+    state.controller = controller;
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    state.loading = true;
+    state.loadError = false;
+    $('refresh-catalog').disabled = true;
+    renderCards();
+    try {
+      const response = await fetch('./catalog.json', { cache: 'no-store', signal: controller.signal });
+      if (!response.ok) throw Error('Catalog HTTP ' + response.status);
+      const apps = Core.parseCatalog(await response.json());
+      if (state.controller !== controller) return;
+      state.apps = apps;
+      state.lastLoaded = Date.now();
+    } catch {
+      if (state.controller !== controller) return;
+      state.apps = [];
+      state.loadError = true;
+    } finally {
+      clearTimeout(timeout);
+      if (state.controller === controller) {
+        state.loading = false; state.loaded = true;
+        $('refresh-catalog').disabled = false;
+        $('total-count').textContent = state.loadError ? 'تعذّر التحميل' : state.apps.length + ' تطبيق';
+        buildCategories(); buildFeatured(); updateFavorites(); applyRoute();
+      }
     }
   }
-  function syncMobileTab() {
-    if (state.favoritesOnly) return setMobileTab('mobile-saved');
-    const atCatalog = $('catalog').getBoundingClientRect().top < 180;
-    setMobileTab(atCatalog ? 'mobile-catalog' : 'mobile-home');
-  }
+  $('refresh-catalog').addEventListener('click', loadCatalog);
+  function updateConnection() { $('offline-banner').hidden = navigator.onLine; }
+  addEventListener('offline', updateConnection);
+  addEventListener('online', () => { updateConnection(); if (state.loadError) loadCatalog(); });
+  updateConnection();
+  addEventListener('storage', event => {
+    if (event.key === favoritesKey || event.key === null) { state.favorites = Core.savedIds(readLocal(favoritesKey)); renderCards(); updateFavorites(); }
+    if (event.key === themeKey || event.key === null) setTheme(readLocal(themeKey));
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && !state.loading && Date.now() - state.lastLoaded > 60000 && navigator.onLine) loadCatalog();
+  });
   let scrollQueued = false;
   addEventListener('scroll', () => {
     if (scrollQueued) return;
     scrollQueued = true;
-    requestAnimationFrame(() => { scrollQueued = false; syncMobileTab(); });
+    requestAnimationFrame(() => { scrollQueued = false; document.querySelector('.app-bar').classList.toggle('is-scrolled', scrollY > 8); });
   }, { passive: true });
-  $('mobile-home').addEventListener('click', () => {
-    state.favoritesOnly = false;
-    render();
-    setMobileTab('mobile-home');
-  });
-  $('mobile-catalog').addEventListener('click', () => {
-    state.favoritesOnly = false;
-    render();
-    setMobileTab('mobile-catalog');
-  });
-  $('mobile-saved').addEventListener('click', () => {
-    state.favoritesOnly = !state.favoritesOnly;
-    render();
-    $('catalog').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    setMobileTab(state.favoritesOnly ? 'mobile-saved' : 'mobile-catalog');
-  });
-
-  // Material ink ripple: visual feedback only, never intercepts the control click.
   document.addEventListener('pointerdown', event => {
-    if (event.button !== 0 || matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        !(event.target instanceof Element)) return;
-    const element = event.target.closest('button, a.button, a.card-download, a.nav-link, a.identity, a.mobile-tab, summary');
-    if (!element || element.disabled) return;
-    const bounds = element.getBoundingClientRect();
+    if (event.button !== 0 || reducedMotion.matches || !(event.target instanceof Element)) return;
+    const target = event.target.closest('button,a.nav-item,a.card-download,a.button,a.brand,summary');
+    if (!target || target.disabled) return;
+    const bounds = target.getBoundingClientRect();
     if (!bounds.width || !bounds.height) return;
-    const diameter = Math.max(bounds.width, bounds.height) * 2.1;
-    const wave = node('span', 'ripple-wave');
-    wave.style.setProperty('--ripple-size', diameter + 'px');
-    wave.style.setProperty('--ripple-x', (event.clientX - bounds.left - diameter / 2) + 'px');
-    wave.style.setProperty('--ripple-y', (event.clientY - bounds.top - diameter / 2) + 'px');
+    const size = Math.hypot(bounds.width, bounds.height) * 2;
+    const wave = el('span', 'ripple-wave');
     wave.setAttribute('aria-hidden', 'true');
-    element.append(wave);
-    wave.addEventListener('animationend', () => wave.remove(), { once: true });
-    setTimeout(() => wave.remove(), 650);
+    wave.style.setProperty('--ripple-size', size + 'px');
+    wave.style.setProperty('--ripple-x', event.clientX - bounds.left - size / 2 + 'px');
+    wave.style.setProperty('--ripple-y', event.clientY - bounds.top - size / 2 + 'px');
+    target.append(wave);
+    setTimeout(() => wave.remove(), 600);
   }, { passive: true });
-
-  function categories() {
-    const counts = new Map([['الكل', state.apps.length]]);
-    for (const app of state.apps) {
-      const category = app.category || 'عام';
-      counts.set(category, (counts.get(category) || 0) + 1);
-    }
-    return counts;
-  }
-  function filterApps() {
-    const words = normalize(state.query).split(/\s+/).filter(Boolean);
-    const list = state.apps.filter(app => {
-      if (state.category !== 'الكل' && (app.category || 'عام') !== state.category) return false;
-      if (state.favoritesOnly && !state.favorites.has(app.id)) return false;
-      const haystack = normalize([app.name, app.description, app.category, app.packageName].join(' '));
-      return words.every(word => haystack.includes(word) ||
-        (word.startsWith('ال') && word.length > 3 && haystack.includes(word.slice(2))));
-    });
-    const compareLatest = (a, b) => isoDate(b.publishedAt).localeCompare(isoDate(a.publishedAt)) || collator.compare(a.name, b.name);
-    list.sort((a, b) => {
-      switch (state.sort) {
-        case 'oldest': return -compareLatest(a, b);
-        case 'name': return collator.compare(a.name, b.name);
-        case 'name-desc': return collator.compare(b.name, a.name);
-        default: return compareLatest(a, b);
-      }
-    });
-    return list;
-  }
-  function renderCategories() {
-    const fragment = document.createDocumentFragment();
-    for (const [category, count] of categories()) {
-      const button = node('button', 'filter');
-      button.type = 'button';
-      button.setAttribute('aria-pressed', String(category === state.category));
-      button.append(node('span', '', category), node('small', '', count));
-      button.addEventListener('click', () => {
-        state.category = category;
-        render();
-      });
-      fragment.append(button);
-    }
-    $('filters').replaceChildren(fragment);
-  }
-  function updateFavoritesCount() {
-    const count = state.apps.filter(app => state.favorites.has(app.id)).length;
-    $('favorites-count').textContent = String(count);
-    $('favorites-toggle').setAttribute('aria-pressed', String(state.favoritesOnly));
-  }
-  function toggleFavorite(app) {
-    if (state.favorites.has(app.id)) state.favorites.delete(app.id);
-    else state.favorites.add(app.id);
-    setSaved(favoritesKey, [...state.favorites]);
-    renderCards();
-    updateFavoritesCount();
-    if (state.current?.id === app.id) updateModalFavorite();
-  }
-  function favoriteButton(app) {
-    const saved = state.favorites.has(app.id);
-    const button = node('button', 'card-favorite');
-    button.type = 'button';
-    button.setAttribute('aria-label', saved ? 'إزالة ' + app.name + ' من المحفوظة' : 'حفظ ' + app.name);
-    button.setAttribute('title', saved ? 'إزالة من المحفوظة' : 'حفظ التطبيق');
-    button.setAttribute('aria-pressed', String(saved));
-    button.innerHTML = heartSvg;
-    button.addEventListener('click', () => toggleFavorite(app));
-    return button;
-  }
-  function card(app) {
-    const article = node('article', 'app-card');
-    const header = node('div', 'card-heading');
-    const appIcon = node('img', 'card-icon');
-    icon(appIcon, app);
-    const titleBlock = node('div');
-    titleBlock.append(node('h3', '', app.name), node('span', 'card-category', app.category || 'عام'));
-    header.append(appIcon, titleBlock);
-    article.append(header, favoriteButton(app));
-    article.append(node('p', 'card-description', app.description || 'تعرّف على هذا التطبيق وتفاصيل إصداره.'));
-    const footer = node('div', 'card-footer');
-    const version = node('div', 'card-version');
-    version.append(node('strong', '', 'الإصدار ' + (app.versionName || '—')), node('span', '', formatDate(app.publishedAt)));
-    const actions = node('div', 'card-actions');
-    const download = node('a', 'card-download');
-    download.href = app.apkUrl;
-    download.target = '_blank';
-    download.rel = 'noopener noreferrer';
-    download.append(node('span', '', 'تحميل APK'));
-    download.insertAdjacentHTML('beforeend', downloadSvg);
-    download.setAttribute('aria-label', 'تحميل ' + app.name + ' APK');
-    const details = node('button', 'card-details', 'التفاصيل');
-    details.type = 'button';
-    details.addEventListener('click', () => openDetails(app, details));
-    actions.append(download, details);
-    footer.append(version, actions);
-    article.append(footer);
-    return article;
-  }
-  function emptyState() {
-    const container = node('div', 'empty-state');
-    const icon = node('div', 'empty-mark', state.loadError ? '!' : '⌕');
-    const title = node('h3', '', state.loadError ? 'تعذّر تحميل التطبيقات' : state.favoritesOnly ? 'لا توجد تطبيقات محفوظة هنا' : 'لا توجد نتائج مطابقة');
-    const subtitle = node('p', '', state.loadError ? 'تحقق من اتصالك وحاول إعادة تحميل القائمة.' : state.favoritesOnly ? 'اضغط علامة القلب على التطبيق لحفظه والعودة إليه بسهولة.' : 'جرّب عبارة أخرى أو غيّر التصنيف.');
-    const button = node('button', '', state.loadError ? 'إعادة المحاولة' : 'عرض جميع التطبيقات');
-    button.type = 'button';
-    button.addEventListener('click', () => state.loadError ? loadCatalog() : clearFilters());
-    container.append(icon, title, subtitle, button);
-    return container;
-  }
-  function renderCards() {
-    const list = filterApps();
-    const fragment = document.createDocumentFragment();
-    if (!list.length) fragment.append(emptyState());
-    else list.forEach(app => fragment.append(card(app)));
-    $('cards').replaceChildren(fragment);
-    $('result-summary').textContent = state.loadError ? 'حدث خطأ أثناء قراءة القائمة' :
-      list.length === state.apps.length ? 'تصفح جميع التطبيقات المتاحة في المتجر' : 'يعرض ' + list.length + ' من ' + state.apps.length + ' تطبيق';
-    $('clear-filters').hidden = state.category === 'الكل' && !state.query && !state.favoritesOnly;
-  }
-  function render() {
-    renderCategories();
-    updateFavoritesCount();
-    renderCards();
-    syncMobileTab();
-  }
-  function clearFilters() {
-    state.category = 'الكل';
-    state.query = '';
-    state.favoritesOnly = false;
-    $('search').value = '';
-    render();
-  }
-  $('clear-filters').addEventListener('click', clearFilters);
-  $('favorites-toggle').addEventListener('click', () => { state.favoritesOnly = !state.favoritesOnly; render(); });
-  $('search').addEventListener('input', event => {
-    state.query = event.target.value.trim();
-    renderCards();
-  });
-  $('sort').addEventListener('change', event => {
-    state.sort = event.target.value;
-    renderCards();
-  });
-
-  function fillModal(id, value) { $(id).textContent = value === undefined || value === null || value === '' ? 'غير متوفر' : String(value); }
-  function updateModalFavorite() {
-    const saved = !!state.current && state.favorites.has(state.current.id);
-    $('modal-save').classList.toggle('is-saved', saved);
-    $('modal-save').setAttribute('aria-pressed', String(saved));
-    $('modal-save').firstChild.textContent = saved ? 'محفوظ' : 'حفظ التطبيق';
-  }
-  function openDetails(app, origin) {
-    const modal = $('details-modal');
-    if (!modal || typeof modal.showModal !== 'function') return;
-    state.current = app;
-    state.lastFocus = origin || document.activeElement;
-    fillModal('modal-name', app.name);
-    fillModal('modal-description', app.description || 'لا يوجد وصف إضافي لهذا التطبيق.');
-    fillModal('modal-category', app.category || 'عام');
-    fillModal('modal-version', app.versionName || '—');
-    fillModal('modal-date', formatDate(app.publishedAt));
-    fillModal('modal-notes', app.notes && !/^\s*\.*\s*$/.test(app.notes) ? app.notes : 'لم تُضف ملاحظات لهذا الإصدار.');
-    fillModal('modal-package', app.packageName || '—');
-    fillModal('modal-code', Number.isInteger(app.versionCode) ? app.versionCode : '—');
-    fillModal('modal-sha', app.sha256 || 'غير متوفرة');
-    fillModal('modal-cert', app.certificateSha256 || 'غير متوفرة');
-    icon($('modal-icon'), app);
-    $('modal-download').href = app.apkUrl;
-    $('toast').textContent = '';
-    $('modal-save').replaceChildren(node('span', '', 'حفظ التطبيق'));
-    $('modal-save').insertAdjacentHTML('beforeend', heartSvg);
-    updateModalFavorite();
-    $('details-modal').querySelector('.technical-info').open = false;
-    if (!modal.open) modal.showModal();
-    $('modal-close').focus();
-  }
-  $('modal-close').addEventListener('click', () => $('details-modal').close());
-  $('details-modal').addEventListener('click', event => {
-    if (event.target === $('details-modal')) $('details-modal').close();
-  });
-  $('details-modal').addEventListener('close', () => {
-    if (state.lastFocus && state.lastFocus.isConnected) state.lastFocus.focus();
-    state.current = null;
-    state.lastFocus = null;
-  });
-  $('modal-save').addEventListener('click', () => {
-    if (state.current) {
-      toggleFavorite(state.current);
-      $('toast').textContent = state.favorites.has(state.current.id) ? 'أُضيف التطبيق إلى محفوظاتك.' : 'أُزيل التطبيق من محفوظاتك.';
-    }
-  });
-  document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
-    const value = $(button.dataset.copy)?.textContent || '';
-    if (!/^[0-9a-f]{64}$/i.test(value)) {
-      $('toast').textContent = 'لا توجد بصمة صالحة للنسخ.';
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(value);
-      $('toast').textContent = 'نُسخت البصمة إلى الحافظة.';
-    } catch {
-      $('toast').textContent = 'تعذّر النسخ التلقائي. يمكنك تحديد البصمة ونسخها يدويًا.';
-    }
-  }));
-
-  function spotlight() {
-    const latest = [...state.apps].sort((a, b) => isoDate(b.publishedAt).localeCompare(isoDate(a.publishedAt)) || collator.compare(a.name, b.name))[0];
-    if (!latest) return;
-    icon($('spotlight-icon'), latest);
-    $('spotlight-name').textContent = latest.name;
-    $('spotlight-description').textContent = latest.description || 'اطّلع على أحدث تفاصيل هذا التطبيق.';
-    $('spotlight-version').textContent = 'الإصدار ' + (latest.versionName || '—');
-    const trigger = $('spotlight-details');
-    trigger.disabled = false;
-    trigger.onclick = () => openDetails(latest, trigger);
-  }
-  function updateTotals() {
-    const total = state.apps.length;
-    $('total-count').textContent = total + ' تطبيقًا متاحًا';
-    $('hero-count').textContent = String(total);
-    $('hero-categories').textContent = String(Math.max(0, categories().size - 1));
-  }
-  async function loadCatalog() {
-    state.loadError = false;
-    $('result-summary').textContent = 'جارٍ جلب التطبيقات...';
-    $('cards').replaceChildren(node('div', 'loading-card'), node('div', 'loading-card'), node('div', 'loading-card'));
-    try {
-      const response = await fetch('./catalog.json', { cache: 'no-store' });
-      if (!response.ok) throw Error('HTTP ' + response.status);
-      const catalog = await response.json();
-      if (catalog.schema !== 1 || !Array.isArray(catalog.apps)) throw Error('Invalid catalog schema');
-      const ids = new Set();
-      state.apps = catalog.apps.filter(app => {
-        if (!app || app.status !== 'published' || typeof app.id !== 'string' || !app.id ||
-          typeof app.name !== 'string' || app.name.length < 1 || app.name.length > 160 ||
-          typeof app.apkUrl !== 'string' || !validDownload(app.apkUrl) || ids.has(app.id)) return false;
-        ids.add(app.id);
-        return true;
-      });
-      updateTotals();
-      spotlight();
-    } catch (error) {
-      state.apps = [];
-      state.loadError = true;
-      $('total-count').textContent = 'التطبيقات غير متاحة مؤقتًا';
-      $('hero-count').textContent = '—';
-      $('hero-categories').textContent = '—';
-      console.error('تعذّر تحميل فهرس المنهج:', error);
-    }
-    render();
-  }
+  applyRoute();
   loadCatalog();
 })();
