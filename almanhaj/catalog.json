@@ -307,25 +307,6 @@
       "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-com-mk-web-2cce27db\/releases\/download\/v17\/app-release.apk"
     },
     {
-      "id": "sjadmsave\/apkstudio-zahr-al_rabi-0637a1fe",
-      "owner": "sjadmsave",
-      "repo": "apkstudio-zahr-al_rabi-0637a1fe",
-      "tag": "v1",
-      "name": "زهر الربيع",
-      "description": "زهر الربيع كتاب",
-      "category": "أدوات",
-      "icon": "https:\/\/sjadmsave.github.io\/almanhaj\/icons\/sjadmsave-apkstudio-zahr-al_rabi-0637a1fe.png?v=e2c136cb9be23d77",
-      "status": "published",
-      "packageName": "zahr.al_rabi",
-      "versionCode": 1,
-      "versionName": "1.0.0",
-      "sha256": "8741f319b11010f7eaa41a83d908e8ffc07eea227177067bb00f43d9e6111713",
-      "certificateSha256": "1024770589c524469d23cfa5644d695e6adf7aaa58160b63c6b87dee5ffae416",
-      "notes": "كتاب زهر الربيع",
-      "publishedAt": "2026-11-07",
-      "apkUrl": "https:\/\/github.com\/sjadmsave\/apkstudio-zahr-al_rabi-0637a1fe\/releases\/download\/v1\/app-release.apk"
-    },
-    {
       "id": "sjadmsave\/apkstudio-hyakl-al-noor-95f011c8",
       "owner": "sjadmsave",
       "repo": "apkstudio-hyakl-al-noor-95f011c8",
